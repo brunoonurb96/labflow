@@ -6,11 +6,11 @@ class TablesCreation:
         cursor = conn.cursor()
         cursor.executescript("""
         CREATE TABLE IF NOT EXISTS patient (
-        cpf INTEGER PRIMARY KEY ,
+        cpf TEXT PRIMARY KEY ,
         name TEXT NOT NULL,
         birthdate DATE NOT NULL,
         address TEXT NOT NULL,
-        phone INTEGER NOT NULL
+        phone TEXT NOT NULL
         );
 
         CREATE TABLE IF NOT EXISTS exams(
