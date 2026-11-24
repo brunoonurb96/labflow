@@ -21,7 +21,7 @@ class TablesCreation:
 
         CREATE TABLE IF NOT EXISTS sample(
         id_sample INTEGER PRIMARY KEY AUTOINCREMENT,
-        cpf_s INTEGER NOT NULL,
+        cpf_s TEXT NOT NULL,
         exam_s INTERGER NOT NULL,
         datetime DATE NOT NULL,
         status TEXT NOT NULL DEFAULT "COLETADA",
