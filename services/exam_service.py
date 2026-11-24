@@ -29,7 +29,12 @@ class ExamService:
             return False
     
     def search_all(self):
-        return self.repository.search_all_repo()
+        
+        if not self.repository.search_all_repo():
+            print("Nenhum exame cadastrado ainda!")
+            return
+        else:
+            return
 
     def search_one_show(self, id):
         iden = self.repository.search_id_repo(id)

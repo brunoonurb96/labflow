@@ -59,9 +59,13 @@ class SampleService:
     
     def search_all_serv(self):
         idens = self.repository.search_all_repo()
-        for iden in idens:
-            print(dict(iden))
-        return True
+        if not idens:
+            print("Nenhuma amostra coletada cadastrada ainda!")
+            return
+        else:
+            for iden in idens:
+                print(dict(iden))
+            return
 
     def update_cpf_serv(self, id):
         

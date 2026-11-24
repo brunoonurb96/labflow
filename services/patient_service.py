@@ -47,7 +47,11 @@ class PatientService:
             return True
     
     def search_all_serv(self):
-        return self.repository.search_all()
+        if not self.repository.search_all():
+            print("Nenhum paciente cadastrado ainda!")
+            return
+        else: 
+            return
 
     def search_cpf(self,cpf,callback):
         if self.repository.search_cpf_repo(cpf):
