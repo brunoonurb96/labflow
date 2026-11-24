@@ -3,21 +3,21 @@ from services.patient_service import *
 from services.exam_service import *
 class SampleService:
 
-    def __init__(self, repository):
+    def __init__(self, repository, patient_service, exam_serv):
         self.repository = repository
+        self.patient_service = patient_service
+        self.exam_service = exam_serv
 
     def register_sample_serv(self, cpf, exam, date):
 
-        sample = Sample(cpf, exam, date)
+        
         try:
             if not cpf.strip():
                 raise ValueError("CPF é obrigatório, não pode estar vazio!")
-            if not PatientService.patient_exists(self, cpf):
-                print("Não existe paciente cadastrado com esse CPF")
-                return
-            if not ExamService.exam_exists(self,exam):
-                print("Não existe exame cadastrado com esse código!")
-                return
+            if not self.patient_service.patient_exists(cpf):
+                raise ValueError("Não existe paciente cadastrado com esse CPF")
+            if not self.exam_service.exam_exists(exam):
+                raise ValueError("Não existe exame cadastrado com esse código!")
             if not exam.strip():
                 raise ValueError("Exame é obrigatório, não pode estar vazio!")
             if not date.strip():
@@ -29,6 +29,8 @@ class SampleService:
         except ValueError as e:
             print(f"Erro: {e}")
             return
+
+        sample = Sample(cpf, exam, date)
         self.repository.register_sample_repo(sample)
         print("Amostra cadastrada com sucesso!")
     
@@ -67,7 +69,7 @@ class SampleService:
         try:
             if not new_cpf.strip():
                 raise ValueError("CPF é obrigatório, não pode estar vazio!")
-            if PatientService.patient_exists(self, new_cpf):
+            if self.patient_service.patient_exists(new_cpf):
                 self.repository.update_cpf_repo(id, new_cpf)
             else:    
                 print("Não existe paciente cadastrado com esse CPF")
@@ -84,7 +86,7 @@ class SampleService:
         try:
             if not new_exam.strip():
                 raise ValueError("Exame é obrigatório, não pode estar vazio!")
-            if ExamService.exam_exists(self,new_exam):
+            if self.exam_service.exam_exists(new_exam):
                 self.repository.update_exam_repo(id, new_exam)
             else:
                 print("Não existe exame cadastrado com esse código!")
@@ -121,3 +123,4 @@ class SampleService:
             print(f"Erro: {e}")
             return
         self.repository.update_status_repo(id, new_status)
+        print("Status alterado com sucesso!")

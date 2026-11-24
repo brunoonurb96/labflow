@@ -20,6 +20,7 @@ class ExamService:
 
         exam = Exam(name, sample_type)
         self.repository.register_exam_repo(exam)
+        print("Exame cadastrado com sucesso!")
 
     def exam_exists(self, cpf):
         if self.repository.search_id_repo(cpf):
@@ -57,6 +58,7 @@ class ExamService:
             print(f"Erro: {e}")
             return
         self.repository.update_name_repo(id, name)
+        print("Nome do exame alterado com sucesso!")
 
     def update_exam_sample(self,id):
 
@@ -70,3 +72,4 @@ class ExamService:
             print(f"Erro: {e}")
             return
         self.repository.update_sample_repo(id, sample)
+        print("Tipo de amostra do exame alterado com sucesso!")

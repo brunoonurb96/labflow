@@ -34,6 +34,7 @@ class PatientService:
         name = name.title()
         patient = Patient(cpf, name, birth, address, phone)
         self.repository.register_patient_repo(patient)
+        print("Paciente cadastrado com sucesso!")
     
     def search_one_show(self, cpf):
         patients = self.repository.search_cpf_repo(cpf)
@@ -41,8 +42,8 @@ class PatientService:
             print("Nenhum paciente cadastrado com esse CPF")
             return False
         else:
-            for patient in patients:
-                print(dict(patient))
+            
+            print(dict(patients))
             return True
     
     def search_all_serv(self):
@@ -57,10 +58,13 @@ class PatientService:
             print("Paciente não encontrado com esse CPF")
 
     def patient_exists(self, cpf):
-        if self.repository.search_cpf_repo(cpf):
-            return True
+        cpf_ = self.repository.search_cpf_repo(cpf)
+        
+        if cpf_:
+            return cpf_ is not None
         else:
             return False
+                    
     
     def update_pat_name(self,cpf):
      
@@ -75,7 +79,7 @@ class PatientService:
             return
                 
         self.repository.update_name_repo(cpf,name)
-
+        print("Nome do paciente alterado com sucesso!")
 
     def update_pat_birth(self,cpf):
 
@@ -93,6 +97,7 @@ class PatientService:
             print(f"Erro: {e}")
             return
         self.repository.update_birth_repo(cpf,birth)
+        print("Data de nascimento alterada com sucesso!")
 
     def update_pat_address(self, cpf):
 
@@ -104,6 +109,7 @@ class PatientService:
             print(f"Erro: {e}")
             return
         self.repository.update_address_repo(cpf,address)
+        print("Endereço alterado com sucesso!")
 
     def update_pat_phone(self,cpf):
 
@@ -117,3 +123,4 @@ class PatientService:
             print(f"Erro: {e}")
             return
         self.repository.update_phone_repo(cpf,phone)
+        print("Telefone alterado com sucesso!")
