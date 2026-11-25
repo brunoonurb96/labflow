@@ -36,7 +36,6 @@ O LabFlow utiliza uma organização baseada em camadas, separando as responsabil
 | Models | Representação das entidades do sistema. |
 | Repositories | Comunicação com o banco de dados e execução de consultas SQL. |
 | Services | Aplicação das regras de negócio e validações. |
-| Views | Interação com o usuário. |
 
 Essa organização facilita a manutenção, a reutilização de código e a evolução do sistema.
 
